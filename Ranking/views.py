@@ -26,11 +26,20 @@ def upload(request):
 def select_ranking(request):
     if request.method == 'GET':
         try:
-            client_name = request.POST.get('client')
-            pagemin = request.POST.get('min')
-            pagemax = request.POST.get('max')
-            mainlist = models.ClientMark.objects.all().order_by('rank')[pagemin:pagemax]
-            client = client_name
-            return HttpResponse(json.dumps({'datalist':mainlist,'own':client}), content_type="application/json")
+            client_name = request.GET.get('client')
+            pagemin = int(request.GET.get('min'))
+            pagemax = int(request.GET.get('max'))
+            mainlist = list(models.ClientMark.objects.all().order_by('rank').values())
+            client={'client':'','rank':'','ranking':''}
+            for i,one in enumerate(mainlist):
+                # print(one['rank'])
+                # print(one['client'])
+                one['ranking']=i+1
+                if client_name == one['client']:
+                    index=mainlist.index(one)+1
+                    client={'client':client_name,'rank':one['rank'],'ranking':index}
+            # client = client_name
+
+            return HttpResponse(json.dumps({'datalist':mainlist[pagemin:pagemax],'own':client}), content_type="application/json")
         except:
             return HttpResponse(json.dumps({'success':False,'info':'参数错误'}), content_type="application/json")

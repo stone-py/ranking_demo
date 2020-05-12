@@ -15,21 +15,22 @@
 	<!--[if IE 6]>
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
-	<title>、</title>
+	<title>上传</title>
 </head>
 
-<body>
+<body >
+<div align="center">
 	<form class="form form-horizontal" action="/upload/" method="post">
 		<input id="client" name="client" type="text">
 		<input id="rank" name="rank" type="text">
-		<input name="" type="submit" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+		<input name="" type="submit" value="&nbsp;上传&nbsp;">
 		{% csrf_token %}
 	</form>
-	<div class="footer">Copyright &copy; stonepy</div>
-
-	<script type="text/javascript" src="/static/lib/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/static/h-ui/js/H-ui.js"></script>
-
+    <br>
+    <br>
+<a href="/select/?client=b&min=0&max=5">查询测试</a><br>
+格式 /select/?client=b&min=1&max=5
+</div>
 </body>
 
 </html>
